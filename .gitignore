@@ -1,3 +1,5 @@
 /.idea
 /target
-spring-boot-demo.iml
+*.iml
+*.ipr
+*.iws

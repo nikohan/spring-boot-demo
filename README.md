@@ -1,6 +1,10 @@
 # spring-boot-demo
 
-#### build the project
+#### build this project 
+```bash
+mvn clean install -DskipTests
+```
+#### run this project
 ```bash
 mvn spring-boot:run
 ```
