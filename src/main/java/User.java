@@ -1,5 +1,3 @@
-package com.test.demo;
-
 /**
  * Created by nikohan on 2016/7/24.
  */

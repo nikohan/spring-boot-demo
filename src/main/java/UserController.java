@@ -1,9 +1,7 @@
-package com.test.demo;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 /**
  * Created by nikohan on 2016/7/24.
  */
@@ -14,7 +12,7 @@ public class UserController {
     public User view(@PathVariable("id") Long id) {
         User user = new User();
         user.setId(id);
-        user.setName("hello world");
+        user.setName("zhang");
         return user;
     }
 }

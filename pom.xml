@@ -6,17 +6,13 @@
 
     <groupId>spring-boot-demo</groupId>
     <artifactId>spring-boot-demo</artifactId>
-    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>effective-demo</module>
-    </modules>
 
     <!-- Inherit defaults from Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>0.5.0.BUILD-SNAPSHOT</version>
+        <version>1.4.0.BUILD-SNAPSHOT</version>
     </parent>
 
     <!-- Add typical dependencies for a web application -->
