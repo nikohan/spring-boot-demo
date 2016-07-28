@@ -1,4 +1,4 @@
-package com.test.demo;
+package com.test.demo.domain;
 
 /**
  * Created by nikohan on 2016/7/24.

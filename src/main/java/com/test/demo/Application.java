@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * entry of application
  * Created by nikohan on 2016/7/24.
  */
 

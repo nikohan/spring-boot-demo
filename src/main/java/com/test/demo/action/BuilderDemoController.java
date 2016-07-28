@@ -1,7 +1,8 @@
-package com.test.demo.effective.builde;
+package com.test.demo.action;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.test.demo.effective.build.Settings;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;

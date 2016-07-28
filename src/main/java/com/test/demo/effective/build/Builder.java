@@ -1,4 +1,4 @@
-package com.test.demo.effective.builde;
+package com.test.demo.effective.build;
 
 /**
  *
