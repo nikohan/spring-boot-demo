@@ -6,10 +6,10 @@ import org.springframework.context.ApplicationEvent;
  *
  * Created by zhaohan on 2016/8/3.
  */
-public class DemoEvent extends ApplicationEvent {
+public class Demo1Event extends ApplicationEvent {
     private String msg;
 
-    public DemoEvent(Object source, String msg) {
+    public Demo1Event(Object source, String msg) {
         super(source);
         this.msg = msg;
     }

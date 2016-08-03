@@ -24,6 +24,7 @@ public class EventController {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(Application.class);
         DemoService demoService = ctx.getBean(DemoService.class);
         demoService.triggerEvent();
+        demoService.triggerAsyncEvent();
 
         jsonObject.put("result", "the end");
         return jsonObject;

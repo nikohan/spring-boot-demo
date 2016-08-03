@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Created by zhaohan on 2016/8/3.
  */
 @Component
-public class DemoService implements ApplicationEventPublisherAware{
+public class DemoService implements ApplicationEventPublisherAware {
 
     ApplicationEventPublisher publisher;
 
@@ -19,7 +19,13 @@ public class DemoService implements ApplicationEventPublisherAware{
     }
 
     public void triggerEvent() {
-        DemoEvent demoEvent = new DemoEvent(this, "hello world");
+        DemoEvent demoEvent = new DemoEvent(this, "DemoEvent");
         publisher.publishEvent(demoEvent);
+    }
+
+    public void triggerAsyncEvent() {
+        AsyncEvent asyncEvent = new AsyncEvent(this, "AsyncEvent");
+        publisher.publishEvent(asyncEvent); //TODO 并没有实现异步
+        System.out.println("next");
     }
 }
