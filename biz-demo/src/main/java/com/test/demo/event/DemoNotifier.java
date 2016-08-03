@@ -2,7 +2,10 @@ package com.test.demo.event;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.Future;
 
 /**
  *
@@ -26,12 +29,14 @@ public class DemoNotifier {
 
     @EventListener
     @Async
-    public void processAsyncEvent(AsyncEvent asyncEvent) {
+    public Future<String> processAsyncEvent(AsyncEvent asyncEvent) {
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println(asyncEvent.toString());
+
+        return new AsyncResult<String>("async result");
     }
 }

@@ -25,7 +25,6 @@ public class DemoService implements ApplicationEventPublisherAware {
 
     public void triggerAsyncEvent() {
         AsyncEvent asyncEvent = new AsyncEvent(this, "AsyncEvent");
-        //TODO 并没有实现异步
         publisher.publishEvent(asyncEvent);
     }
 }
