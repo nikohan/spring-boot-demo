@@ -51,17 +51,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
-            <!--<plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <configuration>
-                    <url>http://localhost:8080/manager/text</url>
-                    <username>zhaohan</username>
-                    <password>123456</password>
-                    <path>/${project.artifactId}</path>
-                </configuration>
-            </plugin>-->
         </plugins>
     </build>
 
