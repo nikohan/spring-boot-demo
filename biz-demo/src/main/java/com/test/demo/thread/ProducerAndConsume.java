@@ -1,6 +1,8 @@
 package com.test.demo.thread;
 
 /**
+ * 1.synchronized修饰非静态方法时，则是锁定同一个实例
+ * 2.synchronized修饰静态方法时，则是锁定该类的所有实例
  *
  * Created by zhaohan on 2016/8/9.
  */
@@ -10,44 +12,41 @@ public class ProducerAndConsume {
 
     private static int MIN_PRODUCT = 0;
 
-    private int product;
+    private static int product;
 
-    public ProducerAndConsume(int product) {
-        this.product = product;
-    }
-
-    public synchronized void produce() {
-        if(this.product >= MAX_PRODUCT) {
+    public synchronized static void produce() {
+        if(product >= MAX_PRODUCT) {
             try {
                 System.out.println("产品已满");
-                wait();
+                ProducerAndConsume.class.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         } else {
-            this.product ++;
-            System.out.println("生产者生产第" + this.product + "个产品.");
-            notifyAll();
+            product ++;
+            System.out.println("生产者生产第" + product + "个产品.");
+            ProducerAndConsume.class.notifyAll();
         }
     }
 
-    public synchronized void consume() {
-        if(this.product <= MIN_PRODUCT) {
+    public synchronized static void consume() {
+        if(product <= MIN_PRODUCT) {
             try {
                 System.out.println("缺货");
-                wait();
+                ProducerAndConsume.class.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("消费者消费第"  + this.product + "个产品");
-            this.product --;
-            notifyAll();
+            System.out.println("消费者消费第"  + product + "个产品");
+            product --;
+            ProducerAndConsume.class.notifyAll();
         }
     }
 
     public static void main(String[] args) {
-        ProducerAndConsume shop = new ProducerAndConsume(20);
+        ProducerAndConsume shop = new ProducerAndConsume();
+        ProducerAndConsume shop2 = new ProducerAndConsume();
 
         //启动生产线程
         new Thread(() -> {
@@ -64,7 +63,7 @@ public class ProducerAndConsume {
         //启动消费线程
         new Thread(() -> {
             while(true) {
-                shop.consume();
+                shop2.consume();
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
