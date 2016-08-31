@@ -21,6 +21,7 @@ public class CatchExceptionDemo implements Runnable{
 
     @Override
     public void run() {
+        //会抛出空指针异常
         System.out.println(user.getName());
     }
 }
