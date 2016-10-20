@@ -31,6 +31,7 @@ then execute:
 mvn spring-boot:run
 ```
 
+last, use browser to go http://localhost:8080/user/1
 
 ## deploy to tomcat with maven 
 see [use maven to deploy this project](http://blog.csdn.net/xiejx618/article/details/15022233)
@@ -56,3 +57,10 @@ mvn tomcat7:redeploy
 ```bash 
 mvn dependency:tree
 ```
+
+## Introduce
+#### Swagger
+see [https://springfox.github.io/springfox/](https://springfox.github.io/springfox/) to learn more.
+[Swagger使用总结](http://www.cnblogs.com/h9527/p/5506956.html)
+[RESTful API 利器 Swagger](http://www.razorer.com/2016/10/16/swagger-intro/)
+but it is not working currently.
