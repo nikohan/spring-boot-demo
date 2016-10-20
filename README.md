@@ -61,6 +61,12 @@ mvn dependency:tree
 ## Introduce
 #### Swagger
 see [https://springfox.github.io/springfox/](https://springfox.github.io/springfox/) to learn more.
-[Swagger使用总结](http://www.cnblogs.com/h9527/p/5506956.html)
-[RESTful API 利器 Swagger](http://www.razorer.com/2016/10/16/swagger-intro/)
-but it is not working currently.
+
+ [Swagger使用总结](http://www.cnblogs.com/h9527/p/5506956.html)
+
+ [RESTful API 利器 Swagger](http://www.razorer.com/2016/10/16/swagger-intro/)
+
+ [Swagger：Rest API的描述语言](https://zhuanlan.zhihu.com/p/21353795)
+#####swagger-ui
+When you running the project with swagger , you can visit http://localhost:8080/swagger-ui.html#/.
+Then input the swagger http api:http://localhost:8080/v2/api-docs.
