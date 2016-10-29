@@ -4,17 +4,18 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * [effective java item 66]
  * Created on 2016/10/28.
  */
-public class VolatileDemo {
-    private static volatile int num = 0;
+public class AtomicDemo {
+    private static final AtomicLong num = new AtomicLong();
 
-    //volatile 不能保证++操作符的线程安全性
-    public static int generateSerialNumber() {
-        return num++;
+    //AtomicLong是线程安全类
+    public static long generateSerialNumber() {
+        return num.getAndIncrement();
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
@@ -22,7 +23,7 @@ public class VolatileDemo {
         ExecutorService executor = Executors.newFixedThreadPool(10000);
         for (int tNum = 0; tNum < a; tNum++) {
             Future future = executor.submit(() -> {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 10; i ++) {
                     generateSerialNumber();
                     System.out.println(num);
                 }
