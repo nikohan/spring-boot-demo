@@ -5,7 +5,7 @@ package com.test.demo.thread;
  */
 public class WaitAndNotifyDemo {
     public static void main(String[] args) throws InterruptedException {
-        Object lock = new Object();
+        final Object lock = new Object();
         Thread t1 = new Thread(new WaitDemo(lock));
         t1.start();
         System.out.println("thread1 is starting...");

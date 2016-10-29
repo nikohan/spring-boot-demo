@@ -30,5 +30,6 @@ public class VolatileDemo {
             });
             future.isDone();
         }
+        executor.shutdown();
     }
 }

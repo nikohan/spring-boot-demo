@@ -1,5 +1,6 @@
 package com.test.demo.concurrency;
 
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -31,5 +32,6 @@ public class AtomicDemo {
             });
             future.isDone();
         }
+        executor.shutdown();
     }
 }
