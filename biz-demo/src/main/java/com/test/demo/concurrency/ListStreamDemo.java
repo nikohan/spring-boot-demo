@@ -1,6 +1,7 @@
 package com.test.demo.concurrency;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,17 +20,25 @@ public class ListStreamDemo <T> {
         this.data = data;
     }
 
-    public T get() {
+    public void read(List<T> list) {
+        read(list, 500);
+    }
+
+    public void read(List<T> list, int num) {
         Iterator<T> i = data.iterator();
-        if(i.hasNext()) {
+        int count = 0;
+        while (i.hasNext() && count < num) {
             T item = i.next();
             data.remove(item);
-            return item;
+            list.add(item);
         }
-        return null;
     }
 
     public void add(T item) {
         data.add(item);
+    }
+
+    public void addAll(List<T> list) {
+        data.addAll(list);
     }
 }
