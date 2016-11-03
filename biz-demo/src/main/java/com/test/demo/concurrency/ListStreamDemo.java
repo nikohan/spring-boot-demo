@@ -1,44 +1,53 @@
 package com.test.demo.concurrency;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created on 2016/11/2.
  */
-public class ListStreamDemo <T> {
+public class ListStreamDemo <T>{
 
     private List<T> data;
 
+    private int maxSize;
+
     public ListStreamDemo() {
         data = new ArrayList<>();
+        maxSize = 2000;
     }
 
-    public ListStreamDemo(List<T> data) {
+    public ListStreamDemo(List<T> data, int maxSize) {
         this.data = data;
+        this.maxSize = maxSize;
     }
 
-    public void read(List<T> list) {
-        read(list, 500);
+    public int read(List<T> list) {
+        return read(list, 500);
     }
 
-    public void read(List<T> list, int num) {
+    public int read(List<T> list, int num) {
         Iterator<T> i = data.iterator();
         int count = 0;
         while (i.hasNext() && count < num) {
             T item = i.next();
-            data.remove(item);
             list.add(item);
+            data.remove(item);
+            count++;
         }
+        return count;
     }
 
-    public void add(T item) {
-        data.add(item);
+    public boolean add(T item) {
+        return data.add(item);
     }
 
-    public void addAll(List<T> list) {
-        data.addAll(list);
+    public boolean addAll(List<T> list) {
+        if(data.size() + list.size() > maxSize) {
+            return false;
+        }
+        return data.addAll(list);
     }
 }
