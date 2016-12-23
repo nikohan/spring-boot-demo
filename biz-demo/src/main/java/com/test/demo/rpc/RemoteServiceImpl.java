@@ -5,7 +5,8 @@ package com.test.demo.rpc;
  */
 public class RemoteServiceImpl implements RemoteService {
     @Override
-    public void printHello() {
+    public String printHello(String name) {
         System.out.println("call remote method....");
+        return "hello " + name;
     }
 }

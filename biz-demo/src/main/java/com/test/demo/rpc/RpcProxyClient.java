@@ -33,6 +33,6 @@ public class RpcProxyClient implements InvocationHandler{
 
     public static void main(String[] args) {
         RemoteService service = (RemoteService) getProxy(new RemoteServiceImpl());
-        service.printHello();
+        service.printHello("nikohan");
     }
 }
