@@ -19,16 +19,16 @@ public class LoadDemo {
     public static String getServerByRoundRobin()
     {
         // 重建一个Map，避免服务器的上下线导致的并发问题
-        Map<String, Integer> serverMap =
+        Map<String, Server> serverMap =
                 new HashMap<>();
-        serverMap.putAll(IpMap.serverWeightMap);
+        serverMap.putAll(IpMap.serverMap);
 
         // 取得Ip地址List
         Set<String> keySet = serverMap.keySet();
         List<String> keyList = new ArrayList<>();
         keyList.addAll(keySet);
 
-        String server = null;
+        String server;
         synchronized (pos)
         {
             if (pos >= keySet.size()) {
@@ -45,9 +45,9 @@ public class LoadDemo {
     public static String getServerByRandom()
     {
         // 重建一个Map，避免服务器的上下线导致的并发问题
-        Map<String, Integer> serverMap =
+        Map<String, Server> serverMap =
                 new HashMap<>();
-        serverMap.putAll(IpMap.serverWeightMap);
+        serverMap.putAll(IpMap.serverMap);
 
         // 取得Ip地址List
         Set<String> keySet = serverMap.keySet();
@@ -64,9 +64,9 @@ public class LoadDemo {
     public static String getServerByHash()
     {
         // 重建一个Map，避免服务器的上下线导致的并发问题
-        Map<String, Integer> serverMap =
+        Map<String, Server> serverMap =
                 new HashMap<>();
-        serverMap.putAll(IpMap.serverWeightMap);
+        serverMap.putAll(IpMap.serverMap);
 
         // 取得Ip地址List
         Set<String> keySet = serverMap.keySet();
@@ -86,9 +86,9 @@ public class LoadDemo {
     public static String getServerByWeightRoundRobin()
     {
         // 重建一个Map，避免服务器的上下线导致的并发问题
-        Map<String, Integer> serverMap =
+        Map<String, Server> serverMap =
                 new HashMap<>();
-        serverMap.putAll(IpMap.serverWeightMap);
+        serverMap.putAll(IpMap.serverMap);
 
         // 取得Ip地址List
         Set<String> keySet = serverMap.keySet();
@@ -97,14 +97,14 @@ public class LoadDemo {
         List<String> serverList = new ArrayList<>();
         while (iterator.hasNext())
         {
-            String server = iterator.next();
-            int weight = serverMap.get(server);
+            String ip = iterator.next();
+            int weight = serverMap.get(ip).getWeight();
             for (int i = 0; i < weight; i++) {
-                serverList.add(server);
+                serverList.add(ip);
             }
         }
 
-        String server = null;
+        String server;
         synchronized (pos)
         {
             if (pos >= keySet.size())
@@ -120,9 +120,9 @@ public class LoadDemo {
     public static String getServerByWeightRandom()
     {
         // 重建一个Map，避免服务器的上下线导致的并发问题
-        Map<String, Integer> serverMap =
+        Map<String, Server> serverMap =
                 new HashMap<>();
-        serverMap.putAll(IpMap.serverWeightMap);
+        serverMap.putAll(IpMap.serverMap);
 
         // 取得Ip地址List
         Set<String> keySet = serverMap.keySet();
@@ -131,10 +131,10 @@ public class LoadDemo {
         List<String> serverList = new ArrayList<>();
         while (iterator.hasNext())
         {
-            String server = iterator.next();
-            int weight = serverMap.get(server);
+            String ip = iterator.next();
+            int weight = serverMap.get(ip).getWeight();
             for (int i = 0; i < weight; i++) {
-                serverList.add(server);
+                serverList.add(ip);
             }
         }
 
