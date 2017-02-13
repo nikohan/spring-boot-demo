@@ -10,6 +10,7 @@ public class MathUtilTest {
     @Test
     public void gcdTest() throws Exception {
         int[] s = {2,8,6};
-        System.out.println(MathUtil.gcd(s));
+        System.out.println(MathUtil.gcd1(s));
+        System.out.println(MathUtil.gcd2(s));
     }
 }

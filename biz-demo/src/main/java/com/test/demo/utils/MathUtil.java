@@ -17,7 +17,7 @@ public class MathUtil {
     }
 
     //数组中的最大公约数
-    public static int gcd(int[] s) {
+    public static int gcd1(int[] s) {
         if(null == s || s.length <= 0) {
             return 0;
         }
@@ -33,5 +33,31 @@ public class MathUtil {
         }
 
         return res;
+    }
+
+    //另一种是求最大公约数的方式
+    public static int gcd2(int[] ary) {
+
+        int min = ary[0];
+
+        for (int i = 0; i < ary.length; i++) {
+            if (ary[i] < min) {
+                min = ary[i];
+            }
+        }
+        while (min >= 1) {
+            boolean isCommon = true;
+            for (int i = 0; i < ary.length; i++) {
+                if (ary[i] % min != 0) {
+                    isCommon = false;
+                    break;
+                }
+            }
+            if (isCommon) {
+                break;
+            }
+            min--;
+        }
+        return min;
     }
 }
