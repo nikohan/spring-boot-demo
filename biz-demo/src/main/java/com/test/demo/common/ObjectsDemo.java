@@ -2,6 +2,7 @@ package com.test.demo.common;
 
 import com.test.demo.domain.User;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
