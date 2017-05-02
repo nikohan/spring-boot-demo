@@ -11,8 +11,6 @@ import cn.jpush.api.push.model.PushPayload;
 import cn.jpush.api.push.model.audience.Audience;
 import cn.jpush.api.push.model.notification.AndroidNotification;
 import cn.jpush.api.push.model.notification.Notification;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 
 /**
  * https://github.com/jpush/jpush-api-java-client
@@ -45,24 +43,13 @@ public class JPushDemo {
     }
 
     private static PushPayload buildPushObject() {
-        JsonObject inbox = new JsonObject();
-        inbox.add("line1", new JsonPrimitive("line1 string"));
-        inbox.add("line2", new JsonPrimitive("line2 string"));
-        inbox.add("contentTitle", new JsonPrimitive("title string"));
-        inbox.add("summaryText", new JsonPrimitive("+3 more"));
         Notification notification = Notification.newBuilder()
-                .addPlatformNotification(AndroidNotification.newBuilder()
-                        .setAlert("alert")
-                        .setBigPicPath("path to big picture")
-                        .setBigText("long text")
-                        .setBuilderId(1)
-                        .setCategory("CATEGORY_SOCIAL")
-                        .setInbox(inbox)
-                        .setStyle(1)
-                        .setTitle("Alert test")
-                        .setPriority(1)
-                        .build())
-                .build();
+                .setAlert("content")
+                .addPlatformNotification(
+                        AndroidNotification.newBuilder()
+                                .setTitle("Alert test")
+                                .build()
+                ).build();
         return PushPayload.newBuilder()
                 .setPlatform(Platform.all())
                 .setAudience(Audience.registrationId("18071adc030dcba91c0"))
