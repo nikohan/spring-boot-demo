@@ -76,12 +76,13 @@ public class ObjectsDemo {
         a.setA(1);
         a.setB(2);
         EqualDemo b = new EqualDemo();
-        b.setA(0);
-        b.setB(33);
+        b.setA(1);
+        b.setB(2);
 
         System.out.println(a.hashCode());
         System.out.println(b.hashCode());
         System.out.println(a.equals(b));
+        System.out.println(a == b);
     }
 
     @Test
