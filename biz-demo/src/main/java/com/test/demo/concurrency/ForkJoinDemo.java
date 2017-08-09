@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * http://www.cnn6.net/html/java/201784/202445.html
+ * http://www.cnblogs.com/jiyuqi/p/4547082.html
  * Created on 2017/8/9.
  */
 public class ForkJoinDemo extends ForkJoinService<List<String>> {
