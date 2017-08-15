@@ -31,7 +31,7 @@ then execute:
 mvn spring-boot:run
 ```
 
-last, use browser to go http://localhost:8080/user/1
+last, use browser to go http://localhost:8080/user/1 or http://127.0.0.1:8080/user/1
 
 ## deploy to tomcat with maven 
 see [use maven to deploy this project](http://blog.csdn.net/xiejx618/article/details/15022233)
