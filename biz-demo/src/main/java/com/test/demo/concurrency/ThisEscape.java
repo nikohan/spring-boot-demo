@@ -27,7 +27,7 @@ class SafeListener {
     private SafeListener() {
         listener = new EventListener() {
             public void onEvent(Event e) {
-                e.trigger(yes);
+                e.trigger(yes);//yes == true
             }
         };
         yes = true;
