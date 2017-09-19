@@ -12,9 +12,9 @@ import org.springframework.core.io.ClassPathResource;
 public class BeanTest {
 	@Test
 	public void getBean() throws Exception {
-		BeanFactory factory = new XmlBeanFactory(new ClassPathResource("config/application.xml"));
-
-		User user = (User) factory.getBean("user");
-		System.out.println(user.getId());
+//		BeanFactory factory = new XmlBeanFactory(new ClassPathResource("config/application.xml"));
+//
+//		User user = (User) factory.getBean("user");
+//		System.out.println(user.getId());
 	}
 }
