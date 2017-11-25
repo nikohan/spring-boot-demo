@@ -12,6 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class FastFail {
 
+	public static final String Test = "test";
+
 	public static void list() {
 		List<String> strList = new ArrayList<>();
 		strList.add("0");
@@ -43,7 +45,7 @@ public class FastFail {
 		}
 	}
 
-	public static void concurrentHashMapTest() {
+	public static void concurrentHashMapTest() throws Exception {
 		Map<String, String> map = new ConcurrentHashMap<>();
 		map.put("0", "0");
 		map.put("1", "1");
@@ -59,7 +61,7 @@ public class FastFail {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 //		list();
 //		hashMapTest();
 		concurrentHashMapTest();
