@@ -1,7 +1,7 @@
 package com.test.demo.algorithms;
 
 /**
- * 0<i,j,k<100,i + j + k = 100,总共多少组(i,j,k)
+ * 0<i,j,k<100,(i,j,k)互不相同，三个数与顺序无关，即(1,2,97)和(2,1,97)视为一组，i + j + k = 100,总共多少组(i,j,k)
  * Created on 2017/11/30.
  */
 public class TotalGroupCalculator {
