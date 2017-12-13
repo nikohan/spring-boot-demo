@@ -6,7 +6,7 @@ import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisPubSub;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -33,7 +33,7 @@ public class RealTimeRedis {
 	private Map<String, String> cache;
 
 	//处理redis事件handlers
-	private List<RedisEventHandler> handlers;
+	private Collection<RedisEventHandler> handlers;
 
 	private RealTimeRedis() {
 		this.handlers = new ArrayList<>();
@@ -158,16 +158,8 @@ public class RealTimeRedis {
 		return cache;
 	}
 
-	private void setCache(Map<String, String> cache) {
-		this.cache = cache;
-	}
-
-	private List<RedisEventHandler> getHandlers() {
+	private Collection<RedisEventHandler> getHandlers() {
 		return handlers;
-	}
-
-	private void setHandlers(List<RedisEventHandler> handlers) {
-		this.handlers = handlers;
 	}
 
 	private JedisPool getJedisPool() {

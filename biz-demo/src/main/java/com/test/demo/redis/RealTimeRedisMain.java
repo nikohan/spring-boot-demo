@@ -10,7 +10,7 @@ public class RealTimeRedisMain {
 		while (true) {
 			Thread.sleep(1000);
 			System.out.println(realTimeRedis.get("test"));
-			realTimeRedis.stop();
+//			realTimeRedis.stop();
 		}
 	}
 }
