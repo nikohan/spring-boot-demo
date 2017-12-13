@@ -7,6 +7,7 @@ import redis.clients.jedis.JedisPubSub;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,16 +43,16 @@ public class RealTimeRedis {
 		registerHandler(new FlushRedisEventHandler());
 	}
 
-	public static RealTimeRedis newInstance(String host, int port, long timeout, int dbIndex) {
+	public static RealTimeRedis newInstance(String host, int port, int timeout, int dbIndex) {
 		RealTimeRedis realTimeRedis = new RealTimeRedis();
 
 		//init redis
 		JedisPoolConfig config = new JedisPoolConfig();
 		config.setMaxTotal(10000);
 		config.setMaxIdle(20);
-		config.setMaxWaitMillis(timeout);
+		config.setMaxWaitMillis(10000);
 		config.setTestOnBorrow(true);
-		realTimeRedis.setJedisPool(new JedisPool(config, host, port));
+		realTimeRedis.setJedisPool(new JedisPool(config, host, port, timeout));
 		realTimeRedis.setDbIndex(dbIndex);
 
 		JedisPubSub jedisPubSub = new JedisPubSub() {
@@ -74,7 +75,25 @@ public class RealTimeRedis {
 				}
 			}
 		};
+
 		realTimeRedis.setJedisPubSub(jedisPubSub);
+
+		//启动订阅redis事件线程
+		Runnable runnable = () -> {
+			while (true) {
+				try {
+					System.out.println("------start psubscribe");
+					realTimeRedis.getJedis().psubscribe(jedisPubSub, realTimeRedis.getAllRedisKeyPattern());
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					System.out.println("------end psubscribe");
+				}
+			}
+		};
+		Thread listenRedisThread = new Thread(runnable);
+		listenRedisThread.setDaemon(true);
+		listenRedisThread.start();
 
 		return realTimeRedis;
 	}
@@ -86,21 +105,16 @@ public class RealTimeRedis {
 	public String put(String redisKey, String value) {
 		String cacheKey = getCacheKey(redisKey);
 		String res = cache.put(cacheKey, value);
-		syncSubscribe(cache.keySet());
 		getJedis().set(redisKey, value);
+//		syncSubscribe();
 		return res;
 	}
 
 	public String remove(String redisKey) {
 		String cacheKey = getCacheKey(redisKey);
 		String res = cache.remove(cacheKey);
-
-		if (cache.isEmpty()) {
-			stop();
-		} else {
-			syncSubscribe(cache.keySet());
-		}
 		getJedis().del(redisKey);
+//		syncSubscribe();
 		return res;
 	}
 
@@ -108,24 +122,13 @@ public class RealTimeRedis {
 		return RedisKeySpacePatternPrefix1 + dbIndex + RedisKeySpacePatternPrefix2 + redisKey;
 	}
 
+	public String getAllRedisKeyPattern() {
+		return RedisKeySpacePatternPrefix1 + dbIndex + RedisKeySpacePatternPrefix2 + "*";
+	}
+
 	//同步订阅信息
-	private void syncSubscribe(Set<String> existKeySet) {
-		//转化为数组
-		String[] existKeyArr = new String[existKeySet.size()];
-		int i = 0;
-		for (String key : existKeySet) {
-			existKeyArr[i++] = key;
-		}
-
+	private void syncSubscribe() {
 		stop();
-		Runnable runnable = () -> {
-			//todo 单独放置，不会每次put时新启一个线程
-			getJedis().psubscribe(jedisPubSub, existKeyArr);
-		};
-
-		Thread listenRedisThread = new Thread(runnable);
-		listenRedisThread.setDaemon(true);
-		listenRedisThread.start();
 	}
 
 	public void stop() {
@@ -137,6 +140,19 @@ public class RealTimeRedis {
 
 	public boolean registerHandler(RedisEventHandler handler) {
 		return handlers.add(handler);
+	}
+
+	private String[] getCacheKeyArray() {
+		Set<String> existKeySet = new HashSet<>(cache.keySet());
+
+		//转化为数组
+		String[] existKeyArr = new String[existKeySet.size()];
+		int i = 0;
+		for (String key : existKeySet) {
+			existKeyArr[i++] = key;
+		}
+
+		return existKeyArr;
 	}
 
 	private Jedis getJedis() {

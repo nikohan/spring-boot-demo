@@ -5,7 +5,7 @@ package com.test.demo.redis;
  */
 public class RealTimeRedisMain {
 	public static void main(String[] args) throws InterruptedException {
-		RealTimeRedis realTimeRedis = RealTimeRedis.newInstance("192.168.30.104", 6379, 100, 3);
+		RealTimeRedis realTimeRedis = RealTimeRedis.newInstance("192.168.30.104", 6379, 10000, 4);
 		realTimeRedis.put("test", "123");
 		while (true) {
 			Thread.sleep(1000);

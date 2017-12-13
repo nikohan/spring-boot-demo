@@ -9,5 +9,6 @@ public class FlushRedisEventHandler implements RedisEventHandler {
 	public void handle(RedisEventContext context) {
 		//更新本地缓存
 		context.flushCache();
+		System.out.println("channel:" + context.getChannel());
 	}
 }
