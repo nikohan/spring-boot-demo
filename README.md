@@ -14,11 +14,11 @@ if you want to deploy the project , you can do this: (must install jdk1.8 and co
 
 * run
 ```bash 
-java -jar biz-demo/target/biz-demo-1.0-SNAPSHOT.jar
+java -jar biz-demo/target/biz-demo.war
 ```
 * debugging.Then, you can use the remote debugging.
 ```bash 
-java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar biz-demo/target/biz-demo-1.0-SNAPSHOT.jar
+java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar biz-demo/target/biz-demo.war
 ```
 
 #### Or using the Maven plugin to running
