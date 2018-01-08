@@ -1,0 +1,19 @@
+#spring boot 默认配置文件
+
+server:
+  port: 8080
+#  context-path: /v2-demo  #项目前缀
+
+
+spring:
+  application:
+    name: v2-demo
+
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  http:
+      multipart:
+        enabled: true
+        max-file-size: 50MB #限制的文件大小
+        max-request-size: 50MB #限制的文件大小
