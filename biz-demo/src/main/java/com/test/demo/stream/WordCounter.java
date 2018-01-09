@@ -1,5 +1,7 @@
 package com.test.demo.stream;
 
+import org.springframework.util.Assert;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,11 @@ import java.util.Map;
  */
 public class WordCounter implements StringConsumer {
 	private Map<String, Integer> wordCountMap = new HashMap<>();
+
+	public WordCounter(Map<String, Integer> wordCountMap) {
+		Assert.notNull(wordCountMap, "wordCountMap is null");
+		this.wordCountMap = wordCountMap;
+	}
 
 	public Map<String, Integer> getWordCountMap() {
 		return wordCountMap;

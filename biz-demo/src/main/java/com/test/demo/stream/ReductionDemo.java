@@ -1,7 +1,14 @@
 package com.test.demo.stream;
 
+import com.test.demo.algorithms.sort.BubbleSort;
+import com.test.demo.algorithms.sort.FastSort;
+
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.function.Consumer;
 
 /**
  * https://docs.oracle.com/javase/tutorial/collections/streams/reduction.html
@@ -10,9 +17,22 @@ import java.util.List;
 public class ReductionDemo {
 
 	public static void main(String[] args) {
-		testCollect();
-		testReduce();
-		testWordCount();
+//		testCollect();
+//		testReduce();
+//		testWordCount();
+
+		int n = 100000;
+		int[] nums = new int[n];
+		for (int i = 0; i < n; i++) {
+			nums[i] = randomInt(n);
+		}
+
+		System.out.println("testParallelStream:" + testParallelStream(nums));
+		System.out.println("testStream:" + testStream(nums));
+		System.out.println("testCollections:" + testCollections(nums));
+//		System.out.println("testBubbleSort:" + testBubbleSort(nums));
+		//todo StackOverflowError
+		System.out.println("testFastSort:" + testFastSort(nums));
 	}
 
 	public static void testCollect() {
@@ -36,13 +56,55 @@ public class ReductionDemo {
 	}
 
 	public static void testWordCount() {
-		List<String> words = Arrays.asList("a", "a", "b", "a", "a", "b");
+		List<String> words = Arrays.asList("a", "a", "b", "a", "a", "b", "ad", "ad", "ad", "c");
+
+		Map<String, Integer> countMap = new HashMap<>();
+		countMap.put("c", 2);
 
 		WordCounter countCollect = words.stream()
-										.collect(WordCounter::new,
+										.collect(() -> new WordCounter(countMap),
 												WordCounter::accept,
 												WordCounter::combine);
 
 		System.out.println("word count：" + countCollect.getWordCountMap());
+	}
+
+	public static long testParallelStream(int[] nums) {
+		return testTime(nums,
+				list -> Arrays.stream(list).parallel().sorted().forEach(value -> {}));
+	}
+
+	public static long testStream(int[] nums) {
+		return testTime(nums,
+				list -> Arrays.stream(list).sorted().forEach(value -> {}));
+	}
+
+	public static long testCollections(int[] nums) {
+		return testTime(nums, Arrays::sort);
+	}
+
+	public static long testBubbleSort(int[] nums) {
+		return testTime(nums, BubbleSort::sort);
+	}
+
+	public static long testFastSort(int[] nums) {
+		return testTime(nums, FastSort::sort);
+	}
+
+
+	private static int randomInt(int max) {
+		Random random = new Random();
+		return random.nextInt(max);
+	}
+
+	private static void display(List<Integer> nums) {
+		nums.forEach(i -> System.out.print(i + ","));
+	}
+
+	private static long testTime(int[] nums, Consumer<int[]> c) {
+		long start = System.currentTimeMillis();
+		c.accept(nums);
+		long end = System.currentTimeMillis();
+		return end - start;
 	}
 }

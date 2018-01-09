@@ -12,14 +12,24 @@ public class FastSort {
 	public static void main(String[] args) {
 		int[] array = new int[] {3, 2, 4, 1, 5, 9, 6, 7, 8};
 		System.out.println(Arrays.toString(array));
-		sort(array, 0, array.length - 1);
+		sort(array);
 		System.out.println(Arrays.toString(array));
+	}
+
+	public static void sort(int[] array) {
+		sort(array, 0, array.length - 1);
 	}
 
 	public static void sort(int[] array, int lo , int hi) {
 		if(lo >= hi) {
 			return;
 		}
+
+		if(hi - lo + 1 <= 100) {
+			BubbleSort.sort(array);
+			return;
+		}
+
 		int index = partition(array, lo, hi);
 		sort(array, lo,index - 1);
 		sort(array,index + 1, hi);
