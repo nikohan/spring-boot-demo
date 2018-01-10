@@ -25,8 +25,9 @@ public class FastSort {
 			return;
 		}
 
+		//数组在小于一定值时使用其他排序方式，避免递归过深
 		if(hi - lo + 1 <= 100) {
-			BubbleSort.sort(array);
+			BubbleSort.sort(array, lo, hi + 1);
 			return;
 		}
 

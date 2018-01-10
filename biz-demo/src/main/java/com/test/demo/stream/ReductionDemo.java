@@ -21,7 +21,7 @@ public class ReductionDemo {
 //		testReduce();
 //		testWordCount();
 
-		int n = 100000;
+		int n = 100000000;
 		int[] nums = new int[n];
 		for (int i = 0; i < n; i++) {
 			nums[i] = randomInt(n);
@@ -29,10 +29,9 @@ public class ReductionDemo {
 
 		System.out.println("testParallelStream:" + testParallelStream(nums));
 		System.out.println("testStream:" + testStream(nums));
-		System.out.println("testCollections:" + testCollections(nums));
+//		System.out.println("testCollections:" + testCollections(nums));
 //		System.out.println("testBubbleSort:" + testBubbleSort(nums));
-		//todo StackOverflowError
-		System.out.println("testFastSort:" + testFastSort(nums));
+//		System.out.println("testFastSort:" + testFastSort(nums));
 	}
 
 	public static void testCollect() {
@@ -97,13 +96,21 @@ public class ReductionDemo {
 		return random.nextInt(max);
 	}
 
-	private static void display(List<Integer> nums) {
-		nums.forEach(i -> System.out.print(i + ","));
+	private static void display(int[] nums) {
+		Arrays.stream(nums).forEach(i -> System.out.print(i + ","));
+		System.out.println();
+	}
+
+	private static int[] ofCopy(int[] nums) {
+		int[] copyNums = new int[nums.length];
+		System.arraycopy(nums, 0, copyNums, 0, nums.length);
+		return copyNums;
 	}
 
 	private static long testTime(int[] nums, Consumer<int[]> c) {
+		int[] copyNums = ofCopy(nums);
 		long start = System.currentTimeMillis();
-		c.accept(nums);
+		c.accept(copyNums);
 		long end = System.currentTimeMillis();
 		return end - start;
 	}
