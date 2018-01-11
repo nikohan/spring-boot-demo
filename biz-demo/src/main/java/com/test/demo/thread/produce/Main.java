@@ -6,7 +6,8 @@ package com.test.demo.thread.produce;
 public class Main {
 	public static void main(String[] args) {
 //		BlockQueue<Integer> blockQueue = new WaitNotifyBlockQueue<>(1);
-		BlockQueue<Integer> blockQueue = new ReentrantLockBlockQueue<>(1);
+//		BlockQueue<Integer> blockQueue = new ReentrantLockBlockQueue<>(1);
+		BlockQueue<Integer> blockQueue = new ArrayBlockingQueue<>(100);
 
 		new Producer(blockQueue).start();
 		new Consumer(blockQueue).start();
