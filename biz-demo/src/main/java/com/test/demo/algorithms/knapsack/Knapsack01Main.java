@@ -5,6 +5,8 @@ package com.test.demo.algorithms.knapsack;
  * http://www.hawstein.com/posts/dp-knapsack.html
  * http://blog.csdn.net/crayondeng/article/details/15784093
  * http://novoland.github.io/%E7%AE%97%E6%B3%95/2014/07/26/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98.html
+ *
+ * 完全背包：http://blog.csdn.net/kangroger/article/details/38864689
  * Created on 2018/1/10.
  */
 public class Knapsack01Main {
