@@ -10,6 +10,7 @@
     <modules>
         <module>biz-demo</module>
 		<module>v2-demo</module>
+		<module>activiti-demo</module>
     </modules>
     <packaging>pom</packaging>
 
