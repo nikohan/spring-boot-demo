@@ -11,6 +11,7 @@
         <module>biz-demo</module>
 		<module>v2-demo</module>
 		<module>activiti-demo</module>
+		<module>sql-gen</module>
     </modules>
     <packaging>pom</packaging>
 
