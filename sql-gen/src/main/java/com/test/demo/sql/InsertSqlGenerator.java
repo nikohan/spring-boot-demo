@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 public class InsertSqlGenerator extends AbstractSqlGenerator {
 
 	@Override
-	protected String doGenerate(ResultSet res) {
+	protected String doGenerate(ResultSet res, String tbName) {
 		return null;
 	}
 

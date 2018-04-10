@@ -1,10 +1,15 @@
 package com.test.demo.sql;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractSqlGenerator implements SqlGenerator {
+
+	private final static Log log = LogFactory.getLog(AbstractSqlGenerator.class);
 
 	private DBHelper dbHelper;
 
@@ -20,15 +25,16 @@ public abstract class AbstractSqlGenerator implements SqlGenerator {
 
 		//查询
 		ResultSet res = dbHelper.query(getSql(tbName));
-		return doGenerate(res);
+		return doGenerate(res, tbName);
 	}
 
 	/**
 	 * 根据getSql的结果生成指定sql
 	 * @param res
+	 * @param tbName
 	 * @return
 	 */
-	protected abstract String doGenerate(ResultSet res);
+	protected abstract String doGenerate(ResultSet res, String tbName);
 
 	/**
 	 * 查询sql
@@ -44,11 +50,13 @@ public abstract class AbstractSqlGenerator implements SqlGenerator {
 			return "";
 		}
 
-		StringBuilder builder = new StringBuilder();
+		StringBuilder sql = new StringBuilder();
+		sql.append("SET NAMES utf8mb4;\r\nSET FOREIGN_KEY_CHECKS = 0;\r\n\r\n\r\n");
 		for (String tbName : tbNames) {
-			builder.append(generate(tbName)).append("\r\n\r\n\r\n");
+			sql.append(generate(tbName)).append("\r\n\r\n\r\n");
 		}
-		return builder.toString();
+		sql.append("SET FOREIGN_KEY_CHECKS = 1;");
+		return sql.toString();
 	}
 
 	@Override
@@ -65,7 +73,7 @@ public abstract class AbstractSqlGenerator implements SqlGenerator {
 				tbNames.add(res.getString(1));
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			log.error(ex);
 		}
 		return tbNames;
 	}
