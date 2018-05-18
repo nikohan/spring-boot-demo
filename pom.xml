@@ -12,6 +12,7 @@
 		<module>v2-demo</module>
 		<module>activiti-demo</module>
 		<module>sql-gen</module>
+		<module>es-job-demo</module>
     </modules>
     <packaging>pom</packaging>
 
