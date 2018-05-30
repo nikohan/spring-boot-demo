@@ -7,6 +7,9 @@ import com.dangdang.ddframe.job.lite.config.LiteJobConfiguration;
 import com.dangdang.ddframe.job.reg.base.CoordinatorRegistryCenter;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.state.ConnectionState;
+import org.apache.curator.framework.state.ConnectionStateListener;
 
 /**
  * Created by zhaohan on 2018/5/18.
@@ -20,6 +23,14 @@ public class JobDemo {
 		CoordinatorRegistryCenter regCenter = new ZookeeperRegistryCenter(
 				new ZookeeperConfiguration("localhost:2181", "es-job-demo"));
 		regCenter.init();
+		//添加监听器
+		CuratorFramework client = (CuratorFramework) regCenter.getRawClient();
+		client.getConnectionStateListenable().addListener(new ConnectionStateListener() {
+			@Override
+			public void stateChanged(CuratorFramework client, ConnectionState newState) {
+				System.out.println("connection state : " + newState.name());
+			}
+		});
 		return regCenter;
 	}
 
