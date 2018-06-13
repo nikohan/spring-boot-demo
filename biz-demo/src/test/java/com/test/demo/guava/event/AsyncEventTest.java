@@ -2,8 +2,7 @@ package com.test.demo.guava.event;
 
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
-import com.test.demo.utils.concurrent.ExecutorServiceFactory;
-import com.test.demo.utils.concurrent.NamedExecutorServiceFactory;
+import com.test.demo.utils.concurrent.ExecutorServiceObject;
 import org.junit.Test;
 
 /**
@@ -13,10 +12,10 @@ public class AsyncEventTest {
 
 	@Test
 	public void asyncListen() {
-		ExecutorServiceFactory executorServiceFactory = new NamedExecutorServiceFactory("async-event",
+		ExecutorServiceObject serviceObject = new ExecutorServiceObject("async-event",
 				Runtime.getRuntime().availableProcessors() * 2);
 
-		EventBus eventBus = new AsyncEventBus(executorServiceFactory.create());
+		EventBus eventBus = new AsyncEventBus(serviceObject.create());
 		AsyncTestListener listener = new AsyncTestListener();
 		eventBus.register(listener);
 

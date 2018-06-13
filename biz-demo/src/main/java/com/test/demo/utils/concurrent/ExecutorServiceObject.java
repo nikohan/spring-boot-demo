@@ -13,19 +13,24 @@ import java.util.concurrent.TimeUnit;
 /**
  * 线程池执行服务工厂.
  */
-public final class NamedExecutorServiceFactory implements ExecutorServiceFactory {
+public final class ExecutorServiceObject {
 
 	private final ThreadPoolExecutor threadPoolExecutor;
 
 	private final BlockingQueue<Runnable> workQueue;
 
-	public NamedExecutorServiceFactory(final String namingPattern, final int threadSize) {
+	public ExecutorServiceObject(final String namingPattern, final int threadSize) {
 		workQueue = new LinkedBlockingQueue<>();
 		threadPoolExecutor = new ThreadPoolExecutor(threadSize, threadSize, 5L, TimeUnit.MINUTES, workQueue,
 				new BasicThreadFactory.Builder().namingPattern(Joiner.on("-").join(namingPattern, "%s")).build());
 		threadPoolExecutor.allowCoreThreadTimeOut(true);
 	}
 
+	/**
+	 * 创建线程池服务对象.
+	 *
+	 * @return 线程池服务对象
+	 */
 	public ExecutorService create() {
 		return MoreExecutors.listeningDecorator(MoreExecutors.getExitingExecutorService(threadPoolExecutor));
 	}
