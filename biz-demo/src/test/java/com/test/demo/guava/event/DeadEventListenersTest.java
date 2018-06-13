@@ -8,7 +8,7 @@ import org.junit.Test;
  */
 public class DeadEventListenersTest {
 	@Test
-	public void testDeadEventListeners() throws Exception {
+	public void testDeadEventListeners() {
 
 		EventBus eventBus = new EventBus("test");
 		DeadEventListener deadEventListener = new DeadEventListener();

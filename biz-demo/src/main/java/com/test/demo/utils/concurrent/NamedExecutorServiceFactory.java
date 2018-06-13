@@ -1,4 +1,4 @@
-package com.test.demo.guava.event;
+package com.test.demo.utils.concurrent;
 
 import com.google.common.base.Joiner;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -13,25 +13,20 @@ import java.util.concurrent.TimeUnit;
 /**
  * 线程池执行服务工厂.
  */
-public final class ExecutorServiceFactory {
+public final class NamedExecutorServiceFactory implements ExecutorServiceFactory {
 
 	private final ThreadPoolExecutor threadPoolExecutor;
 
 	private final BlockingQueue<Runnable> workQueue;
 
-	public ExecutorServiceFactory(final String namingPattern, final int threadSize) {
+	public NamedExecutorServiceFactory(final String namingPattern, final int threadSize) {
 		workQueue = new LinkedBlockingQueue<>();
 		threadPoolExecutor = new ThreadPoolExecutor(threadSize, threadSize, 5L, TimeUnit.MINUTES, workQueue,
 				new BasicThreadFactory.Builder().namingPattern(Joiner.on("-").join(namingPattern, "%s")).build());
 		threadPoolExecutor.allowCoreThreadTimeOut(true);
 	}
 
-	/**
-	 * 创建线程池服务对象.
-	 *
-	 * @return 线程池服务对象
-	 */
-	public ExecutorService createExecutorService() {
+	public ExecutorService create() {
 		return MoreExecutors.listeningDecorator(MoreExecutors.getExitingExecutorService(threadPoolExecutor));
 	}
 
