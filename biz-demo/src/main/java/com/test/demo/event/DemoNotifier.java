@@ -31,12 +31,25 @@ public class DemoNotifier {
     @Async
     public Future<String> processAsyncEvent(AsyncEvent asyncEvent) {
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(asyncEvent.toString());
+        System.out.println("processAsyncEvent:" + asyncEvent.toString());
 
-        return new AsyncResult<String>("async result");
+        return new AsyncResult<>("async result");
     }
+
+	@EventListener
+	@Async
+	public Future<String> processAsyncEvent2(AsyncEvent asyncEvent) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("processAsyncEvent2:" + asyncEvent.toString());
+
+		return new AsyncResult<>("async result");
+	}
 }
