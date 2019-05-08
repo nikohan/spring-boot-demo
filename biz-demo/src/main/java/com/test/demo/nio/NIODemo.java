@@ -1,6 +1,5 @@
 package com.test.demo.nio;
 
-import org.junit.Test;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -24,7 +23,6 @@ public class NIODemo {
         System.out.println();
     }
 
-    @Test
     public void fileChannelTest() throws Exception {
         RandomAccessFile aFile = new RandomAccessFile("D:/Data/testFrom.txt", "rw");
         FileChannel inChannel = aFile.getChannel();
@@ -48,7 +46,6 @@ public class NIODemo {
         aFile.close();
     }
 
-    @Test
     public void scatterTest() throws Exception {
         RandomAccessFile aFile = new RandomAccessFile("D:/Data/testFrom.txt", "rw");
         FileChannel inChannel = aFile.getChannel();
@@ -67,7 +64,6 @@ public class NIODemo {
         aFile.close();
     }
 
-    @Test
     public void gatherTest() throws Exception {
         RandomAccessFile aFile = new RandomAccessFile("D:/Data/testFrom.txt", "rw");
         FileChannel channel1 = aFile.getChannel();
@@ -88,7 +84,6 @@ public class NIODemo {
         aFile.close();
     }
 
-    @Test
     public void transferFromTest() throws Exception {
         long startTime = System.currentTimeMillis();
 

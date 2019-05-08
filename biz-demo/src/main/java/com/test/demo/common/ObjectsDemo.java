@@ -1,7 +1,6 @@
 package com.test.demo.common;
 
 import com.test.demo.domain.User;
-import org.junit.Test;
 
 import java.util.Date;
 import java.util.Objects;
@@ -53,7 +52,6 @@ public class ObjectsDemo {
         requireNonNullTest();
     }
 
-    @Test
     public void equalTest() {
         EqualDemo a = new EqualDemo();
         a.setA(1);
@@ -70,7 +68,6 @@ public class ObjectsDemo {
         System.out.println(a.equals(c));
     }
 
-    @Test
     public void hashCodeTest() throws Exception {
         EqualDemo a = new EqualDemo();
         a.setA(1);
@@ -85,7 +82,6 @@ public class ObjectsDemo {
         System.out.println(a == b);
     }
 
-    @Test
     public void equalTest2() throws Exception {
         EqualDemo a = new EqualDemo();
         a.setA(1);
