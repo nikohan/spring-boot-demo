@@ -37,8 +37,7 @@ public class Solution4 {
 	}
 
 	public static TreeNode reConstructBinaryTree(int[] pre, int[] in) {
-		if (pre == null || in == null
-				|| in.length == 0
+		if (isEmpty(pre) || isEmpty(in)
 				|| pre.length != in.length) {
 			return null;
 		}
@@ -55,32 +54,13 @@ public class Solution4 {
 			}
 		}
 
-		//子树中序序列
-		int[] leftIn = new int[rootIndex];
-		int[] rightIn = new int[in.length - rootIndex - 1];
-		for (int i = 0; i < in.length; i++) {
-			if (i < rootIndex) {
-				//左子树中序
-				leftIn[i] = in[i];
-			} else if (i > rootIndex) {
-				//右子树中序
-				rightIn[i - rootIndex - 1] = in[i];
-			}
-		}
+		//子树中序
+		int[] leftIn = subArr(in, 0, rootIndex);
+		int[] rightIn = subArr(in, rootIndex + 1, in.length - rootIndex - 1);
 
-		//子树前序序序列
-		int[] leftPre = new int[rootIndex];
-		int[] rightPre = new int[in.length - rootIndex - 1];
-		for (int i = 0, j = 0, k = 0; i < pre.length; i++) {
-			int e = pre[i];
-			if (contains(leftIn, e)) {
-				leftPre[j] = e;
-				j++;
-			} else if (contains(rightIn, e)) {
-				rightPre[k] = e;
-				k++;
-			}
-		}
+		//子树前序
+		int[] leftPre = subArr(pre, 1, rootIndex);
+		int[] rightPre = subArr(pre, rootIndex + 1, in.length - rootIndex - 1);
 
 		rootNode.left = reConstructBinaryTree(leftPre, leftIn);
 		rootNode.right = reConstructBinaryTree(rightPre, rightIn);
@@ -88,17 +68,21 @@ public class Solution4 {
 		return rootNode;
 	}
 
-	private static boolean contains(int[] arr, int target) {
-		if (arr == null || arr.length == 0) {
-			return false;
+	private static int[] subArr(int[] arr, int start, int len) {
+		if (isEmpty(arr)) {
+			return null;
 		}
 
-		for (int e : arr) {
-			if (e == target) {
-				return true;
-			}
+		int[] subArr = new int[len];
+		for (int i = start, j = 0; i < start + len; i++) {
+			subArr[j] = arr[i];
+			j++;
 		}
-		return false;
+		return subArr;
+	}
+
+	private static boolean isEmpty(int[] arr) {
+		return arr == null || arr.length == 0;
 	}
 
 	private static void preDisplay(TreeNode node) {
