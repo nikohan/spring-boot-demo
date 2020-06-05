@@ -13,7 +13,8 @@
 		<module>activiti-demo</module>
 		<module>sql-gen</module>
 		<module>es-job-demo</module>
-    </modules>
+		<module>sentinel-demo</module>
+	</modules>
     <packaging>pom</packaging>
 
     <repositories>
