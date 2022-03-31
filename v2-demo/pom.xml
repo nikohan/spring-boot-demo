@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
 	<properties>
-		<springboot.version>2.0.0.BUILD-SNAPSHOT</springboot.version>
+		<springboot.version>2.5.12</springboot.version>
 		<spring.version>5.0.3.BUILD-SNAPSHOT</spring.version>
 		<start-class>com.test.demo.v2.ApplicationV2</start-class>
 	</properties>
