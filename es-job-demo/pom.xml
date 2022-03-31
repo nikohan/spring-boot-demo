@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
 	<properties>
-		<springboot.version>1.5.6.RELEASE</springboot.version>
+		<springboot.version>2.5.12</springboot.version>
 		<spring.version>4.3.9.RELEASE</spring.version>
 		<latest.release.version>2.1.5</latest.release.version>
 	</properties>
